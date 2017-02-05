@@ -3,7 +3,7 @@ define(function (require) {
   var _ = require('lodash');
   var d3 = require('d3');
   var c3 = require('./bower_components/c3');
-  var moment = require('./bower_components/moment/moment');
+  const moment = require('moment-timezone');
   var module = require('ui/modules').get('kibana/line_sg', ['kibana']);
 
   module.controller('KbnLineVisController', function ($scope, $element, $window, Private) {
