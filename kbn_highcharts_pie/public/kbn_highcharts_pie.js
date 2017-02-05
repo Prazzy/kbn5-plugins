@@ -9,8 +9,8 @@ import highchartsPieEditorTemplate from 'plugins/kbn_highcharts_pie/kbn_highchar
 import visTypes from 'ui/registry/vis_types';
 
 visTypes.register(function KbnHighchartsPieProvider(Private, config) {
-  var TemplateVisType = Private(TemplateVisTypeTemplateVisTypeProvider);
-  var Schemas = Private(VisSchemasProvider);
+  let TemplateVisType = Private(TemplateVisTypeTemplateVisTypeProvider);
+  let Schemas = Private(VisSchemasProvider);
 
   return new TemplateVisType({
     name: 'kbn_highcharts_pie',
