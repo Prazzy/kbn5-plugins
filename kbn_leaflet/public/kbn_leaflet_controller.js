@@ -318,20 +318,16 @@ module.controller('KbnLeafletController', function ($scope, $element, $rootScope
         if ($scope.vis.params.beam_enabled) {
           // get beam names
           const kmlSourceIndexName = $scope.vis.params.beam.index;
-          const beamNames = ["MTNPAC_AFR1_APS7",
-                              "MTNPAC_AG1_T01",
-                              "MTNPAC_APS6_T01",
-                              "MTNPAC_BRW1_GE23SEP_NPH7NSEPV7N",
-                              "MTNPAC_BRW2_GE23NP",
-                              "MTNPAC_BRW2_GE23SWP",
-                              "MTNPAC_BUR3_W2A_D2VH_F1VH_NET3",
-                              "MTNPAC_COL1_IS14",
-                              "MTNPAC_COL1_T11NCA",
-                              "MTNPAC_DUB1_A5",
-                              "MTNPAC_GE23SP_T01",
-                              "MTNPAC_HKG2_SC2",
-                              "MTNPAC_HOL8_T11N_K11BVH_K35VH_NET11",
-                              "MTNPAC_IS15_T01"]; 
+          const beamNames = ["Guam_Restrict_Zone_EE","MTNPAC_AFR1_APS7","MTNPAC_AG1_T01","MTNPAC_APS6_T01","MTNPAC_BRW1_GE23SEP_NPH7NSEPV7N",
+                              "MTNPAC_BRW2_GE23NP","MTNPAC_BRW2_GE23SWP","MTNPAC_BUR3_W2A_D2VH_F1VH_NET3","MTNPAC_COL1_IS14",
+                              "MTNPAC_COL1_T11NCA","MTNPAC_DUB1_A5","MTNPAC_GE23SP_T01","MTNPAC_HKG2_SC2",
+                              "MTNPAC_HOL8_T11N_K11BVH_K35VH_NET11","MTNPAC_IS15_T01","MTNPAC_IS29e_U1_T01","MTNPAC_IS29e_U2_T01",
+                              "MTNPAC_IS29e_U39_T1","MTNPAC_IS29e_U3_T02","MTNPAC_IS29e_U40_T1","MTNPAC_IS29e_U41_T1",
+                              "MTNPAC_IS29e_U42_T1","MTNPAC_IS29e_U43_T1","MTNPAC_IS29e_U44_T1","MTNPAC_IS29e_U4_T01",
+                              "MTNPAC_IS29e_U5_T01","MTNPAC_IS29e_WB_T02","MTNPAC_NSS6_T01","MTNPAC_STM7_T02","MTNPAC_STM8_T02",
+                              "MTNPAC_T12VMC_T01","MTNPAC_T12VMEN_T01","MTNPAC_T12VMES_T01","MTNPAC_T12VME_T01","MTNPAC_T12VMW_T01",
+                              "MTNPAC_T12V_NS_T1","MTNPAC_T14R_T02","MTNPAC_Y300POR_T02","MTNPAC_Y300_T01","Polar_Exclusion_Zone_STM7_EE",
+                              "Whitesand_Zone_V2_EE"]; 
           $scope.controlLayers = L.control.layers(null, [], { collapsed: true }).addTo(map1);
           const highlightStyle = {
               weight: 2,
