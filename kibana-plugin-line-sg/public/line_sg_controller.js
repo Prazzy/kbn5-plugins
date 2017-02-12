@@ -343,7 +343,7 @@ define(function (require) {
     }   
 
     // Get query results ElasticSearch
-    $scope.$watch('esResponse', function (resp) {
+    $scope.$watchMulti(['esResponse', 'vis.params'], function ([resp]) {
       if (resp) {
         console.log(resp);
         metrics.length = 0;

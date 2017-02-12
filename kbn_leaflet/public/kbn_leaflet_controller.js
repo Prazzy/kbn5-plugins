@@ -152,7 +152,7 @@ module.controller('KbnLeafletController', function ($scope, $element, $rootScope
     });
   };
 
-  $scope.$watch('esResponse', function (resp) {
+  $scope.$watchMulti(['esResponse', 'vis.params'], function ([resp]) {
     // if no response
     if (!resp) return;
 

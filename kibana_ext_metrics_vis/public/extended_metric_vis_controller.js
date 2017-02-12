@@ -45,7 +45,7 @@ module.controller('KbnExtendedMetricVisController', function ($scope, Private) {
   };
 
   // watches
-  $scope.$watch('esResponse', function (resp) {
+  $scope.$watchMulti(['esResponse', 'vis.params'], function ([resp]) {
     if (resp) {
       calcOutputs.length = 0;
       metrics.length = 0;

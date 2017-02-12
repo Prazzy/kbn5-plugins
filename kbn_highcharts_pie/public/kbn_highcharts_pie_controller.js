@@ -53,7 +53,7 @@ module.controller('KbnHighchartsPieController', function ($scope, $element, $roo
     _updateDimensions();
   });
 
-  $scope.$watch('esResponse', function (resp) {
+  $scope.$watchMulti(['esResponse', 'vis.params'], function ([resp]) {
     if (!resp || !resp.aggregations) {
         return;
     }
