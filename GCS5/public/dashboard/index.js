@@ -2,6 +2,15 @@ import _ from 'lodash';
 import $ from 'jquery';
 import angular from 'angular';
 import chrome from 'ui/chrome';
+import rison from 'rison-node';
+import {
+  parse as parseUrl,
+  format as formatUrl,
+} from 'url';
+import {
+  getUnhashableStatesProvider,
+  unhashUrl,
+} from 'ui/state_management/state_hashing';
 import 'ui/courier';
 import 'ui/config';
 import 'ui/notify';
@@ -92,6 +101,7 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
     controller: function ($scope, $rootScope, $route, $routeParams, $location, Private, getAppState, savedDashboards) {
 
       const queryFilter = Private(FilterBarQueryFilterProvider);
+      const getUnhashableStates = Private(getUnhashableStatesProvider);
 
       const notify = new Notifier({
         location: 'Dashboard'
@@ -321,6 +331,12 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
         savedDashboards.find().then(function (params) {
             //let esRes = getDashList(params);
             let subUrl = _.find($scope.chrome.getNavLinks(), {'id':'GCS5:dashboard'}).lastSubUrl;
+            const url = $location.absUrl();
+            // Replace hashes with original RISON values.
+            const unhashedUrl = unhashUrl(url, getUnhashableStates());
+            const parsedUrl = parseUrl(unhashedUrl);
+            // Get the Angular route, after the hash, and remove the #.
+            const parsedAppUrl = parseUrl(parsedUrl.hash.slice(1), true);
             $scope.chrome.setLastUrlFor(dash.title, subUrl);
             let esRes = [{
                 title: 'Dashboard1',
@@ -338,7 +354,7 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
                 url: `#/dashboard/e9b0c500-e9b4-11e6-af9c-133269a38460`
               }
             ]
-            dashboardList = esRes;
+            let dashboardList = esRes;
             // let dashboardList = [];
             // esRes.forEach(function (row) {
             //     dashboardList.push({url: "#/dashboard/".concat(row.id), title: row.title})
@@ -347,7 +363,15 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
               if (res.title === dash.title) res.url = subUrl;
               else {
                 let prevUrl = $scope.chrome.getLastUrlFor(res.title);
-                if (prevUrl) res.url = prevUrl;
+                if (prevUrl) {
+                  let unhashedPrevUrl = unhashUrl(prevUrl, getUnhashableStates());
+                  let parsedPrevUrl = parseUrl(unhashedPrevUrl);
+                  // Get the Angular route, after the hash, and remove the #.
+                  let parsedPrevAppUrl = parseUrl(parsedPrevUrl.hash.slice(1), true);
+                  //rison.decode(parsedAppUrl.query._g);
+                  let url1 = '#' + parsedPrevAppUrl.pathname + '?_g=' + parsedAppUrl.query._g + '&_a=' + parsedPrevAppUrl.query._a;
+                  res.url = url1;
+                }
               }
             });  
             $scope.tabs = dashboardList;
