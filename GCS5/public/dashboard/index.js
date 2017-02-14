@@ -161,8 +161,8 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
             } 
         }
 
-        let es_res = params.hits;
-        es_res = _.filter(es_res, function (hit) {
+        let esRes = params.hits;
+        esRes = _.filter(esRes, function (hit) {
             let options = JSON.parse(hit.optionsJSON);
             let tab_order = parseInt(options.order);
             let menu_group = !_.isUndefined(options.menu_group_name) ? options.menu_group_name : 'UNK';
@@ -197,11 +197,11 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
             }
         });
 
-        es_res = _.sortBy(es_res, function (item) {
+        esRes = _.sortBy(esRes, function (item) {
             return parseInt(JSON.parse(item.optionsJSON).order)
         });
 
-        return es_res;
+        return esRes;
       }
 
       // TODO: need to test this..
@@ -329,7 +329,7 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
 
         // PAC Feature: custom menu tabs showing dashboards 
         savedDashboards.find().then(function (params) {
-            //let esRes = getDashList(params);
+            let esRes = getDashList(params);
             let subUrl = _.find($scope.chrome.getNavLinks(), {'id':'GCS5:dashboard'}).lastSubUrl;
             const url = $location.absUrl();
             // Replace hashes with original RISON values.
@@ -338,27 +338,27 @@ app.directive('dashboardApp', function (Notifier, courier, AppState, timefilter,
             // Get the Angular route, after the hash, and remove the #.
             const parsedAppUrl = parseUrl(parsedUrl.hash.slice(1), true);
             $scope.chrome.setLastUrlFor(dash.title, subUrl);
-            let esRes = [{
-                title: 'Dashboard1',
-                order: 1,
-                url: `#/dashboard/dfd0b180-e9b4-11e6-af9c-133269a38460`
-              },
-              {
-                title: 'Dashboard2',
-                order: 2,
-                url: `#/dashboard/Dashboard2`
-              },
-              {
-                title: 'Dashboard3',
-                order: 3,
-                url: `#/dashboard/e9b0c500-e9b4-11e6-af9c-133269a38460`
-              }
-            ]
-            let dashboardList = esRes;
+            // let esRes = [{
+            //     title: 'test',
+            //     order: 1,
+            //     url: `#/dashboard/49aa4d40-f1ae-11e6-b31a-619e5e5b2fc9`
+            //   },
+            //   {
+            //     title: 'Dashboard2',
+            //     order: 2,
+            //     url: `#/dashboard/e44f0db0-e9b4-11e6-af9c-133269a38460`
+            //   },
+            //   {
+            //     title: 'Dashboard3',
+            //     order: 3,
+            //     url: `#/dashboard/e9b0c500-e9b4-11e6-af9c-133269a38460`
+            //   }
+            // ]            
             // let dashboardList = [];
             // esRes.forEach(function (row) {
             //     dashboardList.push({url: "#/dashboard/".concat(row.id), title: row.title})
             // });
+            let dashboardList = esRes;
             _.map(dashboardList, function (res) {
               if (res.title === dash.title) res.url = subUrl;
               else {

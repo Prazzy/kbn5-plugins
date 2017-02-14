@@ -50,8 +50,15 @@
               class="kuiLocalSearchButton"
               ng-disabled="queryInput.$invalid"
             >
-              <span class="fa fa-search" aria-hidden="true"></span>
+            <span class="fa fa-search" aria-hidden="true"></span>
             </button>
+            <!-- <kbn-tooltip text="Reset Dashboard" placement="bottom" append-to-body="1">
+              <button
+                ng-href="resetDashboard()"
+                aria-label="Reset Dashboard">
+                <i aria-hidden="true" class="fa fa-refresh"></i>
+              </button>
+            </kbn-tooltip> -->
           </div>
           <kbn-typeahead-items></kbn-typeahead-items>
         </div>
