@@ -1,10 +1,8 @@
 # Highcharts Pie Visualization 
-
-## Description
 Pie chart using Highcharts library
 
 ## Screenshots
-
+![screenshot](/kbn_highcharts_pie/images/pie.png?raw=true)
 
 ## Installation (Kibana 5.2.0)
 ```
