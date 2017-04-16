@@ -9,7 +9,7 @@ Pie chart using Highcharts library. Easy to apply Highcharys options.
 Copy kbn_highcharts_pie folder into <kibana_path>/plugins 
 ```
 
-## uninstall
+## Uninstall
 ```
 bin/kibana-plugin remove kbn_highcharts_pie
 ```
